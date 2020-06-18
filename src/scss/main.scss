@@ -1,0 +1,186 @@
+@import "./default-set.scss";
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}
+
+.area-0 {
+  fill: #447;
+}
+
+.line-0 {
+  stroke: #447;
+  stroke-width: 2px;
+  fill: none;
+}
+
+@for $i from 1 through 10 {
+  $idx: $i;
+
+  .area-#{$idx} {
+    fill: nth($hex-colors, $idx);
+  }
+
+  .area-#{$idx}-v {
+    fill: lighten(nth($hex-colors, $idx), 10%);
+  }
+
+  .area-#{$idx}-p {
+    fill: darken(nth($hex-colors, $idx), 10%);
+  }
+
+  .area-#{$idx}-gray {
+    fill: mix(nth($hex-colors, $idx), #fff);
+  }
+
+  .line-#{$idx} {
+    stroke: nth($hex-colors, $idx);
+    stroke-width: 2px;
+    fill: none;
+  }
+
+  .line-#{$idx}-v {
+    stroke: lighten(nth($hex-colors, $idx), 10%);
+    stroke-width: 2px;
+    fill: none;
+  }
+
+  .line-#{$idx}-s {
+    stroke: darken(nth($hex-colors, $idx), 10%);
+    stroke-width: 2px;
+    fill: none;
+  }
+}
+
+.area-100 {
+  fill-opacity: 0;
+}
+
+.graph-link {
+  stroke: #aaa;
+  stroke-width: 4px;
+  fill: none;
+}
+
+.graph-link-v {
+  stroke: #faa;
+  stroke-width: 4px;
+  fill: none;
+}
+
+.graph-node {
+  @extend .area-1;
+  stroke: #555;
+  stroke-width: 2px;
+}
+
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    vertical-align: top;
+    background: #fff;
+    overflow: hidden;
+}
+.svg-content-responsive {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.x.axis {
+  line {
+    storke: #ccc;
+  }
+}
+
+.CodeMirror {
+  height: 600px;
+
+  border: 1px solid #aaa;
+
+  .mark-var-red {
+    background: #faa;
+  }
+
+  .mark-var-green {
+    background: #afa;
+  }
+
+  .mark-var-blue {
+    background: #aaf;
+  }
+
+  .mark-var-skyblue {
+    background: #aff;
+  }
+
+  .mark-var-yellow {
+    background: #ffa;
+  }
+}
+
+.elm-variable-num {
+  list-style: none;
+  width: 100%;
+  display: block;
+  background: #ccf;
+  border: 1px solid #aaa;
+}
+
+.elm-variable {
+  list-style: none;
+  width: 100%;
+  display: block;
+  background: #cfc;
+  border: 1px solid #aaa;
+}
+
+.nav-item {
+  list-style: none;
+  width: 100%;
+}
+
+.brush-circle {
+  stroke: #aaa;
+  stroke-width: 1px;
+  fill: none;
+}
+
+#fg-box {
+  border: 1px solid #aaa;
+}
+
+.svg-container {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.scat-info-panel {
+  fill: #eee;
+  stroke: #999;
+  stroke-width: 1px;
+}
+
+.select-rect {
+  fill: none;
+  stroke: #aaa;
+  stroke-width: 1px;
+}
+
+.select-rect-handle {
+  fill: #fff;
+  stroke: #aaa;
+  stroke-width: 1px;
+}
+
+.brush-circle-handle {
+  stroke: #aaa;
+  stroke-width: 1px;
+  fill: #fff;
+}

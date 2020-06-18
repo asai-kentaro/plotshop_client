@@ -1,0 +1,104 @@
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 3.5rem tall */
+body {
+  padding-top: 3.5rem;
+  background: #f6f6f6;
+}
+
+/*
+ * Typography
+ */
+
+h1 {
+  padding-bottom: 9px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+/*
+ * Sidebar
+ */
+
+.sidebar {
+  position: fixed;
+  top: 51px;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 20px 0 20px 5px;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  border-right: 1px solid #eee;
+}
+
+.sidebar .nav {
+  margin-bottom: 20px;
+}
+
+.sidebar .nav-item {
+  width: 100%;
+}
+
+.sidebar .nav-item + .nav-item {
+  margin-left: 0;
+}
+
+.sidebar .nav-link {
+  border-radius: 0;
+}
+
+/*
+ * Dashboard
+ */
+
+/* Placeholders */
+.placeholders {
+  padding-bottom: 3rem;
+}
+
+.placeholder img {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.list-group-item {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    padding: 0 15px 0 5px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.list-group-item-below {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: none;
+    padding: 0 15px 0 15px;
+    margin-bottom: -1px;
+    background-color: #f6f6f6;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.list-group-item-sub {
+  position: absolute;
+  top: 4px;
+  right: 5px;
+}
+
+.item-font {
+  color: #aaa;
+  cursor: pointer;
+  cursor: pointer;
+}
+
+.item-font:hover {
+  color: #555;
+  cursor: pointer;
+}
