@@ -6,12 +6,4 @@ var config = {
   wsprotocol: "ws"
 }
 
-if(ENV == "server") {
-  config = {
-    host: "www.newasai.com",
-    protocol: "https",
-    wsprotocol: "wss"
-  }
-}
-
 export default config;
