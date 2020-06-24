@@ -1,4 +1,4 @@
-# Plotshop Server
+# Plotshop Client
 
 About Plotshop?
 [Project Page](https://asai-kentaro.github.io/plotshop_server/)
