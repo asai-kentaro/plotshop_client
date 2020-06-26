@@ -36,22 +36,6 @@ var Data = {
         console.log("[error] data update")
     });
   },
-  list: (id, cb) => {
-    const URL = "/api/data/" + id + "/list";
-
-    $.ajax({
-      url: URL,
-      type: 'GET',
-      contentType: 'application/JSON',
-      dataType: 'JSON',
-    })
-    .done(function(res, textStatus, jqXHR){
-      cb(res);
-    })
-    .fail(function(jqXHR, textStatus, errorThrown){
-      console.log("[API Error] list_data")
-    });
-  },
   load_csv: (data, cb) => {
     const URL = "/api/data/csv";
 

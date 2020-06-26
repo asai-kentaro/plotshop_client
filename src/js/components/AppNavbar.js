@@ -9,20 +9,11 @@ class AppNavbar extends React.Component {
 
     this.state = {
       activeKey: 1,
-      datasets: [],
     }
 
     this.handlePhazeChange = this.handlePhazeChange.bind(this);
     this.handleOpenDataUploadModal = this.handleOpenDataUploadModal.bind(this);
     this.handleLoadData = this.handleLoadData.bind(this);
-  }
-
-  componentDidMount() {
-    api_data.list(CODE_ID, (res) => {
-      this.setState({
-        datasets: res.linkdata,
-      });
-    })
   }
 
   handlePhazeChange(selectedKey) {
@@ -71,12 +62,6 @@ class AppNavbar extends React.Component {
   }
 
   render() {
-    var ek = 4.0;
-    const datanav = this.state.datasets.map((data) => {
-      ek += 0.1;
-      return <MenuItem active={data.name == this.props.loadedDataset.filename} key={ek} eventKey={data.name}>{data.name}</MenuItem>;
-    })
-
     return (
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
@@ -96,13 +81,6 @@ class AppNavbar extends React.Component {
             <NavItem eventKey={3} href="#">
               Designer
             </NavItem>
-          </Nav>
-          <Nav>
-            <NavDropdown eventKey={4} title="Datasets" id="basic-nav-dropdown" onSelect={this.handleLoadData}>
-              {datanav}
-              <MenuItem divider />
-              <MenuItem eventKey={10}>Dataset Settings</MenuItem>
-            </NavDropdown>
           </Nav>
           <Nav pullRight>
             <NavItem eventKey={1} href="/svc/">

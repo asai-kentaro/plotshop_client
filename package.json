@@ -4,7 +4,7 @@
   "description": "Plotshop client",
   "main": "index.js",
   "scripts": {
-    "dev-m": "rm -r ../eds_server/mysite/dist/static && mv dist ../eds_server/mysite/dist/static && mv ../eds_server/mysite/dist/static/index.html ../eds_server/mysite/dist/templates/",
+    "dev-m": "rm -r ../plotshop_server/main_server/dist/static && mv dist ../plotshop_server/main_server/dist/static && mv ../plotshop_server/main_server/dist/static/index.html ../plotshop_server/main_server/dist/templates/",
     "dev": "rm -r ../app/mysite/dist/static && mv dist ../app/mysite/dist/static && mv ../app/mysite/dist/static/index.html ../app/mysite/dist/templates/",
     "build:local": "NODE_ENV=local gulp",
     "build:server": "NODE_ENV=server gulp"

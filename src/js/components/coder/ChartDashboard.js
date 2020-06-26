@@ -1,7 +1,6 @@
 import React from 'react';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
 
-import api_test from "../../api/test";
 import api_data from "../../api/data";
 
 import LineChart from '../chart/LineChart';

@@ -44,27 +44,6 @@ var Test = {
       console.log("[API Error] exec_break")
     });
   },
-  exec_run: (codes, filename, cb) => {
-    const URL = "/api/run/";
-    const data = {
-      codes: codes,
-      filename: filename,
-    }
-
-    $.ajax({
-      url: URL,
-      data: JSON.stringify(data),
-      type: 'POST',
-      contentType: 'application/JSON',
-      dataType: 'JSON',
-    })
-    .done(function(res, textStatus, jqXHR){
-      cb(res);
-    })
-    .fail(function(jqXHR, textStatus, errorThrown){
-      console.log("[API Error] exec_run")
-    });
-  },
   load_code: (id, cb) => {
     const URL = "/api/code/" + id + "/load";
 
