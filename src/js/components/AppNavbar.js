@@ -25,12 +25,6 @@ class AppNavbar extends React.Component {
       case 1:
         this.props.handleChangeTab("code");
         break;
-      case 2:
-        this.props.handleChangeTab("analyze");
-        break;
-      case 3:
-        this.props.handleChangeTab("design");
-        break;
     }
   }
 
@@ -74,12 +68,6 @@ class AppNavbar extends React.Component {
           <Nav activeKey={this.state.activeKey} onSelect={this.handlePhazeChange}>
             <NavItem eventKey={1} href="#">
               Coder
-            </NavItem>
-            <NavItem eventKey={2} href="#">
-              Analyzer
-            </NavItem>
-            <NavItem eventKey={3} href="#">
-              Designer
             </NavItem>
           </Nav>
           <Nav pullRight>

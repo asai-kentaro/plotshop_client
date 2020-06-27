@@ -3,13 +3,10 @@ import { Grid, Row, Col, Button, Modal, FormGroup, FormControl } from 'react-boo
 
 import AppNavbar from './AppNavbar';
 import CoderStudio from '../containers/CoderStudio';
-import Analyzer from '../containers/Analyzer';
-import Designer from '../containers/Designer';
 
 const $ = require('jquery');
 
 import api_data from "../api/data";
-
 
 class App extends React.Component {
   constructor(props) {
@@ -39,18 +36,6 @@ class App extends React.Component {
             handleModalHide={this.props.handleModalHide}
             loadedDataset={this.props.loadedDataset}/>
         );
-        break;
-
-      case "design":
-        return (
-          <Designer />
-        )
-        break;
-
-      case "analyze":
-        return (
-          <Analyzer />
-        )
         break;
     }})()
 
