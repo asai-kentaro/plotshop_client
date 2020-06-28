@@ -1,1 +1,97 @@
-<h1>Plotshop Client Page</h1>
+<!doctype html>
+<html lang="ja">
+  <head>
+    <title>Plotshop Project Page</title>
+    <script src="./jquery/jquery.min.js"></script>
+    <script src="./bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css"></link>
+  </head>
+  <body style="background: #F9F9F9; padding-left: 80px; padding-right: 80px;">
+    <div class="container">
+      <div class="row" style="margin-top: 30px;">
+        <div class="col-1"></div>
+        <div class="col-10">
+          <h1>Plotshop Project Page</h1>
+        </div>
+        <div class="col-1"></div>
+      </div>
+      <div class="row" style="margin-top: 30px;">
+        <div class="col-1"></div>
+        <div class="col-10">
+          <img style="width: 100%;" src="./img/plotshop_overview.jpg" />
+        </div>
+        <div class="col-1"></div>
+      </div>
+      <div class="row" style="margin-top: 50px;">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6" style="margin-bottom: 30px;">
+          <h2>Plotshop</h2>
+          <div style="margin-top: 10px;">Kentaro Asai, Tsukasa Fukusato, and Takeo Igarashi. "Integrated Development Environment with Interactive Scatter Plot for Examining Statistical Modeling.", CHI 2020. (<a href="https://dl.acm.org/doi/abs/10.1145/3313831.3376455">pdf</a>) </div>
+          <div style="margin-top: 20px;"><b style="margin-right: 5px;">(project)</b><a href="https://www-ui.is.s.u-tokyo.ac.jp/crest/index.html">link</a></div>
+          <div><b style="margin-right: 5px;">(video)</b><a href="https://www.youtube.com/watch?v=42j7_DxsEYc">link</a></div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/IejzDuQsF-g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <h2>About Plotshop?</h2>
+          <div>
+            The development of a statistical modeling program requires example data to observe and verify the behavior of the program. Such example data are either taken from an existing dataset or synthesized using commands. Programmers may want to directly design an arbitrary dataset or modify it interactively, but it is difficult to do so in current development environments. We therefore propose combining a code editor with an interactive scatter plot editor to efficiently understand the behavior of statistical modeling algorithms. The user interactively creates and modifies the dataset on the scatter plot editor, while the system continuously executes the code in the editor, taking the data as input, and shows the result in the editor. This paper presents the design rationale behind the system and introduces several usage scenarios.
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12" style="margin-top: 20px;">
+          <h2>Functions</h2>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="margin-bottom: 20px;">
+          <h4>Execute Python Code on WebBrowser</h4>
+          <img style="width: 100%;" src="./img/plotshop_execcode.jpg"/>
+        </div>
+        <div class="ccol-xs-12 col-sm-12 col-md-6 col-lg-6" style="margin-bottom: 20px;">
+          <h4>Direct Variables Visualization</h4>
+          <img style="width: 100%;" src="./img/plotshop_variablesvis.png"/>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="margin-bottom: 20px;">
+          <h4>Bi-directional Programming Environment</h4>
+          <img style="width: 100%;" src="./img/plotshop_bi-direct.jpg"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12" style="margin-top: 20px;">
+          <h2>Development</h2>
+        </div>
+        <div class="col-12" style="margin-bottom: 5px;">
+          <a href="https://github.com/asai-kentaro/plotshop_server" style="background: #EEE; border: 1px solid #BBB; padding: 2px; border-radius: 2px;"><img style="width: 18px; margin-right: 5px;" src="./img/github-mark.png"/>server</a>
+          <a href="https://github.com/asai-kentaro/plotshop_client" style="background: #EEE; border: 1px solid #BBB; padding: 2px; border-radius: 2px;"><img style="width: 18px; margin-right: 5px;" src="./img/github-mark.png"/>client</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <h5>Server</h5>
+          <ul>
+            <li>Django</li>
+          </ul>
+        </div>
+        <div class="col-6">
+          <h5>Client</h5>
+          <ul>
+            <li>React</li>
+            <li>Redux</li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12" style="margin-top: 20px;">
+          <h2>Related Publications</h2>
+        </div>
+        <div class="col-12" style="margin-bottom: 5px;">
+          <ul>
+            <li>Kentaro Asai, Tsukasa Fukusato, and Takeo Igarashi. "Plotshop: An Interactive System for Designing a 2D Data Distribution on a Scatter Plot." 32nd ACM Symposium on User Interface Software and Technology (UIST), poster, New Orleans, 2019.10.20--23.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
