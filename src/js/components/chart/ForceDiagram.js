@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-var d3 = require('d3');
+const d3 = require('d3');
 
 class ForceDiagram extends Component {
   constructor(props){
@@ -15,9 +15,9 @@ class ForceDiagram extends Component {
   }
 
   makeNodes(variables, vartypes) {
-    var nodes = [];
+    let nodes = [];
 
-    for(var i=0;i<variables.length;i++) {
+    for(let i=0;i<variables.length;i++) {
       if(vartypes[i] == "num") {
         nodes.push({
           id: i,
@@ -32,10 +32,10 @@ class ForceDiagram extends Component {
   }
 
   makeLinks(nodes) {
-    var links = [];
+    let links = [];
 
-    for(var i=0;i<nodes.length-1;i++) {
-      for(var t=i+1;t<nodes.length;t++) {
+    for(let i=0;i<nodes.length-1;i++) {
+      for(let t=i+1;t<nodes.length;t++) {
         links.push({
           source: i,
           target: t,
@@ -47,8 +47,8 @@ class ForceDiagram extends Component {
   }
 
   numvar2varIdx(vartypes) {
-    var vs = [];
-    for(var i=0;i<vartypes.length;i++) {
+    let vs = [];
+    for(let i=0;i<vartypes.length;i++) {
       if(vartypes[i] == "num") {
         vs.push(i);
       }
@@ -57,10 +57,10 @@ class ForceDiagram extends Component {
   }
 
   var2numvarIdx(vartypes) {
-    var numvs = [];
+    let numvs = [];
 
-    var idx = 0;
-    for(var i=0;i<vartypes.length;i++) {
+    let idx = 0;
+    for(let i=0;i<vartypes.length;i++) {
       if(vartypes[i] == "num") {
         numvs.push(idx++);
       } else {
@@ -78,12 +78,12 @@ class ForceDiagram extends Component {
       d3.select(dom).select("svg").remove();
     }
 
-    var height = 500,
+    let height = 500,
       width = 500,
       initPlace= [width/2, height/2];
 
-    var nodes = this.makeNodes(this.props.dataset.variables, this.props.dataset.vartypes);
-    var links = this.makeLinks(nodes);
+    let nodes = this.makeNodes(this.props.dataset.variables, this.props.dataset.vartypes);
+    let links = this.makeLinks(nodes);
 
     this._field = d3.select(dom)
       .classed("svg-container", true)
@@ -121,7 +121,7 @@ class ForceDiagram extends Component {
       d.fy = null;
     }
 
-    var link = this._field
+    let link = this._field
       .selectAll("line")
       .data(links)
       .enter()
@@ -139,7 +139,7 @@ class ForceDiagram extends Component {
         _self.props.handleChangeScatterplot(d.source.id, d.target.id);
       });
 
-    var node = this._field
+    let node = this._field
       .selectAll("g")
       .data(nodes)
       .enter()
@@ -161,7 +161,7 @@ class ForceDiagram extends Component {
       })
 
     // 3. forceSimulation設定
-    var simulation = d3.forceSimulation()
+    let simulation = d3.forceSimulation()
       .force("link", d3.forceLink()
         .distance((d) => { return d.l; })
         .strength(0.03)
@@ -186,10 +186,10 @@ class ForceDiagram extends Component {
   }
 
   make_nodes(nodes, edges) {
-    var _self = this;
-    var interval = 700 / nodes.length;
+    let _self = this;
+    let interval = 700 / nodes.length;
 
-    var cnt = 0;
+    let cnt = 0;
     func_node = (node) => {
       _self._nodes.push(nodes[cnt]);
       cnt += 1;
@@ -198,8 +198,8 @@ class ForceDiagram extends Component {
         setTimeout(func_node, interval);
       } else {
         setTimeout(() => {
-          for(var i = 0; i< edges.length;i++){
-            var s_node, t_node;
+          for(let i = 0; i< edges.length;i++){
+            let s_node, t_node;
             _self._nodes.forEach((d) => {
               if(d.id == edges[i].source) {
                 s_node = d;

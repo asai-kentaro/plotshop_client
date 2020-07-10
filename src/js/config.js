@@ -1,6 +1,6 @@
-var ENV = process.env.NODE_ENV;
+const ENV = process.env.NODE_ENV;
 
-var config = {
+const config = {
   host: "localhost",
   protocol: "http",
   wsprotocol: "ws"

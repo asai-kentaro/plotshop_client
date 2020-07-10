@@ -19,8 +19,8 @@ class App extends React.Component {
   }
 
   handleDataUpload() {
-    var form = $("#upload-form")[0];
-    var formData = new FormData(form);
+    let form = $("#upload-form")[0];
+    let formData = new FormData(form);
 
     api_data.upload(formData);
   }

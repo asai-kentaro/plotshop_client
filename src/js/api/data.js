@@ -1,7 +1,7 @@
 import config from "../config";
 const $ = require('jquery');
 
-var Data = {
+const Data = {
   upload: (data) => {
     const URL = "/dataman/upload/";
 

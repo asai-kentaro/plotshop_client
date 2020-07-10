@@ -29,7 +29,7 @@ class AppNavbar extends React.Component {
   }
 
   handleLoadData(k) {
-    var data = {
+    let data = {
       filename: k,
     }
     api_data.load_csv(data, (res) => {

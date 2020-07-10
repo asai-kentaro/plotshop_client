@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-var d3 = require('d3');
-var _ = require('lodash');
+const d3 = require('d3');
+const _ = require('lodash');
 import ScatterPlot from './ScatterPlot';
 
 const get_plot_color = (idx) => {

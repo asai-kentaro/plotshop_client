@@ -10,6 +10,9 @@ import ScatterPlot from '../chart/ScatterPlot';
 import SPLOMChart from '../chart/SPLOMChart';
 import DataTable from '../table/table';
 
+/*
+ * Charts display panel (Right side in main area)
+ */
 class ChartDashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -122,7 +125,7 @@ class ChartDashboard extends React.Component {
       filename: datafilename,
       data: dfdata,
     };
-    var manipulation = {
+    let manipulation = {
       chartVar: mark.val,
       datafile: datafilename,
       dims: [dataset.variables[dataset.scatterplot.e1], dataset.variables[dataset.scatterplot.e2]],
@@ -161,7 +164,7 @@ class ChartDashboard extends React.Component {
   }
 
   render() {
-    var key = 1;
+    let key = 1;
 
     const colStyle = {
       padding: "2px",

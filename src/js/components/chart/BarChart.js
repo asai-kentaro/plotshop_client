@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-var d3 = require('d3');
-var _ = require('lodash');
+const d3 = require('d3');
+const _ = require('lodash');
 
 class BarChart extends Component {
   constructor(props){
@@ -23,7 +23,7 @@ class BarChart extends Component {
       d3.select(node).select("svg").remove();
     }
 
-    var width = 250,
+    let width = 250,
         height = 200,
         margin = 25,
         x = d3.scaleBand()
@@ -32,10 +32,10 @@ class BarChart extends Component {
         y = d3.scaleLinear()
           .range([height - margin, margin]);
 
-    var data = this.props.data.data;
+    let data = this.props.data.data;
 
     if(data[0].value === undefined) {
-      for(var i=0;i<data.length;i++) {
+      for(let i=0;i<data.length;i++) {
         data[i] = {
           label: i,
           value: data[i],
@@ -43,32 +43,32 @@ class BarChart extends Component {
       }
     }
 
-    var cols = data[0].value.length;
+    let cols = data[0].value.length;
 
     x.domain(data.map((d) => { return d.label; }));
-    var max = data[0].value[0];
-    for(var i=0;i<data.length;i++) {
-      var tmp = _.maxBy(data[i].value);
+    let max = data[0].value[0];
+    for(let i=0;i<data.length;i++) {
+      let tmp = _.maxBy(data[i].value);
       if(max < tmp) {
         max = tmp;
       }
     }
     y.domain([0, max]);
-    var svg = d3.select(node)
+    let svg = d3.select(node)
       .classed("svg-container", true)
       .append("svg")
       .attr("preserveAspectRation", "xMinYMin meet")
       .attr("viewBox", "0 0 " + (width + margin * 2) + " " + (height + margin * 2))
       .classed("svg-content-responsive", true);
 
-    var sections = svg.selectAll(".bar")
+    let sections = svg.selectAll(".bar")
       .data(data)
       .enter()
       .append("g")
       .attr("class", "bar")
       .attr("transform", function(d) { return "translate(" + x(d.label) + ",0)"; });
 
-    var bars = sections.selectAll("rect")
+    let bars = sections.selectAll("rect")
       .data((d) => { return d.value; })
       .enter()
       .append("rect")
@@ -86,9 +86,9 @@ class BarChart extends Component {
     });
     bars.on("click", (d, i) => {
       console.log("=[click] bar=");
-      var code = this.props.mark.eventTemplateClick;
+      let code = this.props.mark.eventTemplateClick;
       code = code.replace(/\^(.+)\^/, d.data.value[labelVarIdx]);
-      var manipulation = {
+      let manipulation = {
         chartVar: this.props.mark.val,
         code: code,
         type: "execute",
@@ -101,11 +101,11 @@ class BarChart extends Component {
     });
 
     const renderAxes = (svg) => {
-      var xAxis = d3.axisBottom()
+      let xAxis = d3.axisBottom()
               .scale(x.range([0, (width - 2 * margin)]))
               .scale(x);
 
-      var yAxis = d3.axisLeft()
+      let yAxis = d3.axisLeft()
               .scale(y.range([height - 2 * margin, 0]))
               .scale(y);
 

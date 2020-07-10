@@ -55,9 +55,9 @@ const initialState = [
 const initialState = [];
 
 const ephemFilter = (state) => {
-  var res = [];
+  let res = [];
 
-  for(var i=0;i<state.length;i++) {
+  for(let i=0;i<state.length;i++) {
     if(!state[i].ephem) {
       res.push(state[i]);
     }
@@ -67,8 +67,8 @@ const ephemFilter = (state) => {
 }
 
 const selectOneDataGroup = (state, var_name, value) => {
-  var newstate = [];
-  for(var i=0;i<state.length;i++) {
+  let newstate = [];
+  for(let i=0;i<state.length;i++) {
     if(state[i].var_name == var_name) {
       state[i].value = [value];
     }
@@ -79,9 +79,9 @@ const selectOneDataGroup = (state, var_name, value) => {
 }
 
 const varTypeSelect = (data) => {
-  var res = [];
+  let res = [];
 
-  for(var i=0;i<data[0].length;i++) {
+  for(let i=0;i<data[0].length;i++) {
     if(!isNaN(Number(data[0][i]))) {
       res.push("num");
     } else {
@@ -132,7 +132,7 @@ const charts = (state = initialState, action) => {
       ]
       break;
     case "DRAW_PLOT_SCATTER":
-      var dataset = {
+      let dataset = {
         filename: "",
         variables: action.value.head,
         vartypes: varTypeSelect(action.value.data),

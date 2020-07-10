@@ -54,29 +54,29 @@ class ScatterPlot extends Component {
   }
 
   setPlotData() {
-    var data = [];
-    var group = [];
-    var dataset = this.props.dataset;
-    var e1 = this.props.dataset.scatterplot.e1;
-    var e2 = this.props.dataset.scatterplot.e2;
-    for(var i=0;i<dataset.data.length;i++) {
+    let data = [];
+    let group = [];
+    let dataset = this.props.dataset;
+    let e1 = this.props.dataset.scatterplot.e1;
+    let e2 = this.props.dataset.scatterplot.e2;
+    for(let i=0;i<dataset.data.length;i++) {
       data.push([Number(dataset.data[i][e1]), Number(dataset.data[i][e2])]);
     }
     this._data = data;
 
     if(this.props.mark && this.props.mark.valueVar) {
-      var valueVarIdx = _.findIndex(dataset.variables, (o) => {return o == this.props.mark.valueVar});
+      let valueVarIdx = _.findIndex(dataset.variables, (o) => {return o == this.props.mark.valueVar});
       valueVarIdx = valueVarIdx == -1 ? 1 : valueVarIdx;
 
-      var group = [];
-      for(var i=0;i<dataset.data.length;i++) {
+      let group = [];
+      for(let i=0;i<dataset.data.length;i++) {
         group.push(Number(dataset.data[i][valueVarIdx]));
       }
       this._group = group;
     } else {
       if(data.length == this.props.selected_group.length) {
-        var group = [];
-        for(var i=0;i<this.props.selected_group.length;i++) {
+        let group = [];
+        for(let i=0;i<this.props.selected_group.length;i++) {
           group.push(this.props.selected_group[i]);
         }
         this._group = group;
@@ -88,39 +88,39 @@ class ScatterPlot extends Component {
   }
 
   eraseGroup() {
-    var group = [];
-    for(var i=0;i<this._data.length;i++) {
+    let group = [];
+    for(let i=0;i<this._data.length;i++) {
       group.push(0);
     }
     this._group = group;
   }
 
   isPointSelected() {
-    var flg = false;
-    for(var i=0;i<this._group.length;i++) {
+    let flg = false;
+    for(let i=0;i<this._group.length;i++) {
       flg = flg || this._group[i] != 0;
     }
     return flg;
   }
 
   getSelectBoundbox() {
-    var selplots = [];
+    let selplots = [];
 
-    for(var i=0;i<this.plotDots._groups[0].length;i++) {
+    for(let i=0;i<this.plotDots._groups[0].length;i++) {
       if(this._group[i] == this.draw_color) {
-        var d = d3.select(this.plotDots._groups[0][i]);
-        var cx = Number(d.attr("cx"));
-        var cy = Number(d.attr("cy"));
+        let d = d3.select(this.plotDots._groups[0][i]);
+        let cx = Number(d.attr("cx"));
+        let cy = Number(d.attr("cy"));
         selplots.push([cx, cy]);
       }
     }
 
     if(!selplots[0]) return;
 
-    var res = [
+    let res = [
       selplots[0][0], selplots[0][0], selplots[0][1], selplots[0][1]
     ];
-    for(var i=0;i<selplots.length;i++) {
+    for(let i=0;i<selplots.length;i++) {
       if(res[0] > selplots[i][0]) {
         res[0] = selplots[i][0];
       }
@@ -166,32 +166,32 @@ class ScatterPlot extends Component {
       d3.select(node).select("svg").remove();
     }
 
-    var height = 400,
+    let height = 400,
       width = 400,
       margin = 35;
 
-    var prev_cursor = [0, 0];
+    let prev_cursor = [0, 0];
 
-    var svg = d3.select(node)
+    let svg = d3.select(node)
       .classed("svg-container", true)
       .append("svg")
       .attr("preserveAspectRation", "xMinYMin meet")
       .attr("viewBox", "0 0 " + width + " " + height)
       .classed("svg-content-responsive", true);
 
-    var x = d3.scaleLinear().range([margin, width-margin]);
-    var y = d3.scaleLinear().range([height-margin, margin]);
+    let x = d3.scaleLinear().range([margin, width-margin]);
+    let y = d3.scaleLinear().range([height-margin, margin]);
 
-    var axisX = d3.axisBottom().scale(x);
-    var axisY = d3.axisLeft().scale(y);
+    let axisX = d3.axisBottom().scale(x);
+    let axisY = d3.axisLeft().scale(y);
 
-
+    let x_val, y_val;
     if(this._data.length <= 1) {
-      var x_val = [0,100];
-      var y_val = [0,100];
+      x_val = [0,100];
+      y_val = [0,100];
     } else {
-      var x_val = d3.extent(this._data, (d) => { return d[0]; });
-      var y_val = d3.extent(this._data, (d) => { return d[1]; });
+      x_val = d3.extent(this._data, (d) => { return d[0]; });
+      y_val = d3.extent(this._data, (d) => { return d[1]; });
     }
 
     if(Math.abs(x_val[1] - x_val[0]) < 0.001) {
@@ -204,8 +204,8 @@ class ScatterPlot extends Component {
     x.domain(x_val).nice();
     y.domain(y_val).nice();
 
-    var plotArea = svg.append("g");
-    var graphArea = plotArea
+    let plotArea = svg.append("g");
+    let graphArea = plotArea
       .append("rect")
       .attr("width", width - margin * 2)
       .attr("height", height - margin * 2)
@@ -225,7 +225,7 @@ class ScatterPlot extends Component {
       .attr("cx", (d) => { return x(d[0]); })
       .attr("cy", (d) => { return y(d[1]); })
 
-    var x_axis = plotArea.append("g")
+    let x_axis = plotArea.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(" + 0 + "," + (height - margin) + ")")
       .call(axisX)
@@ -240,7 +240,7 @@ class ScatterPlot extends Component {
       .style("font-size", 10)
       .text(this.props.dataset.variables[this.props.dataset.scatterplot.e1]);
 
-    var y_axis = plotArea.append("g")
+    let y_axis = plotArea.append("g")
       .attr("class", "y axis")
       .attr("transform", "translate(" + margin + "," + 0 + ")")
       .call(axisY)
@@ -315,18 +315,18 @@ class ScatterPlot extends Component {
       .attr("cx", -100)
       .attr("cy", -100);
 
-    var infoPanel = plotArea
+    let infoPanel = plotArea
       .append("g")
     infoPanel.attr("transform", "translate(-1000, 0)");
     infoPanel.append("rect")
       .attr("class", "scat-info-panel")
       .attr("width", "100px")
       .attr("height", "38px");
-    var infoTextAvg = infoPanel.append("text");
+    let infoTextAvg = infoPanel.append("text");
     infoTextAvg
       .text("avg:(0,0)")
       .attr("transform", "translate(5, 15)");
-    var infoTextVar = infoPanel.append("text");
+    let infoTextVar = infoPanel.append("text");
     infoTextVar
       .text("var:(0,0)")
       .attr("transform", "translate(5, 30)");
@@ -340,14 +340,14 @@ class ScatterPlot extends Component {
     //= brushing manipulation
     //
     const selectPlot = (point) => {
-      var newgroup = [];
-      for(var i=0;i<_self.plotDots._groups[0].length;i++) {
+      let newgroup = [];
+      for(let i=0;i<_self.plotDots._groups[0].length;i++) {
         if(_self._group[i] == _self.def_color) {
-          var d = d3.select(_self.plotDots._groups[0][i]);
-          var cx = Number(d.attr("cx"));
-          var cy = Number(d.attr("cy"));
+          let d = d3.select(_self.plotDots._groups[0][i]);
+          let cx = Number(d.attr("cx"));
+          let cy = Number(d.attr("cy"));
 
-          var dis2 = (point[0] - cx) * (point[0] - cx) + (point[1] - cy) * (point[1] - cy);
+          let dis2 = (point[0] - cx) * (point[0] - cx) + (point[1] - cy) * (point[1] - cy);
           if(dis2 < 10 * 10) {
             newgroup.push(_self.draw_color);
           } else {
@@ -362,17 +362,17 @@ class ScatterPlot extends Component {
     }
 
     const nearestPlotIdx = (point) => {
-      var idx = 0;
-      var d = d3.select(_self.plotDots._groups[0][0]);
-      var cx = Number(d.attr("cx"));
-      var cy = Number(d.attr("cy"));
-      var mindist = (point[0] - cx) * (point[0] - cx) + (point[1] - cy) * (point[1] - cy);
-      for(var i=0;i<_self.plotDots._groups[0].length;i++) {
-        var d = d3.select(_self.plotDots._groups[0][i]);
-        var cx = Number(d.attr("cx"));
-        var cy = Number(d.attr("cy"));
+      let idx = 0;
+      let d = d3.select(_self.plotDots._groups[0][0]);
+      let cx = Number(d.attr("cx"));
+      let cy = Number(d.attr("cy"));
+      let mindist = (point[0] - cx) * (point[0] - cx) + (point[1] - cy) * (point[1] - cy);
+      for(let i=0;i<_self.plotDots._groups[0].length;i++) {
+        let d = d3.select(_self.plotDots._groups[0][i]);
+        let cx = Number(d.attr("cx"));
+        let cy = Number(d.attr("cy"));
 
-        var dis2 = (point[0] - cx) * (point[0] - cx) + (point[1] - cy) * (point[1] - cy);
+        let dis2 = (point[0] - cx) * (point[0] - cx) + (point[1] - cy) * (point[1] - cy);
         if(dis2 < mindist) {
           idx = i;
           mindist = dis2;
@@ -383,8 +383,8 @@ class ScatterPlot extends Component {
     }
 
     const getSelectedPlotIdx = () => {
-      var res = [];
-      for(var i=0;i<_self._group.length;i++) {
+      let res = [];
+      for(let i=0;i<_self._group.length;i++) {
         if(_self._group[i] == _self.draw_color) {
           res.push(i);
         }
@@ -394,16 +394,16 @@ class ScatterPlot extends Component {
     }
 
     const unselectPlot = (point) => {
-      var newgroup = [];
-      for(var i=0;i<_self.plotDots._groups[0].length;i++) {
+      let newgroup = [];
+      for(let i=0;i<_self.plotDots._groups[0].length;i++) {
         if(_self._group[i] == 0) {
           newgroup.push(_self._group[i]);
         } else {
-          var d = d3.select(_self.plotDots._groups[0][i]);
-          var cx = Number(d.attr("cx"));
-          var cy = Number(d.attr("cy"));
+          let d = d3.select(_self.plotDots._groups[0][i]);
+          let cx = Number(d.attr("cx"));
+          let cy = Number(d.attr("cy"));
 
-          var dis2 = (point[0] - cx) * (point[0] - cx) + (point[1] - cy) * (point[1] - cy);
+          let dis2 = (point[0] - cx) * (point[0] - cx) + (point[1] - cy) * (point[1] - cy);
           if(dis2 < 10 * 10) {
             newgroup.push(0);
           } else {
@@ -416,13 +416,13 @@ class ScatterPlot extends Component {
     }
 
     const erasePlot = (point) => {
-      var newgroup = [];
-      for(var i=0;i<_self.plotDots._groups[0].length;i++) {
-        var d = d3.select(_self.plotDots._groups[0][i]);
-        var cx = Number(d.attr("cx"));
-        var cy = Number(d.attr("cy"));
+      let newgroup = [];
+      for(let i=0;i<_self.plotDots._groups[0].length;i++) {
+        let d = d3.select(_self.plotDots._groups[0][i]);
+        let cx = Number(d.attr("cx"));
+        let cy = Number(d.attr("cy"));
 
-        var dis2 = (point[0] - cx) * (point[0] - cx) + (point[1] - cy) * (point[1] - cy);
+        let dis2 = (point[0] - cx) * (point[0] - cx) + (point[1] - cy) * (point[1] - cy);
         if(dis2 < 10 * 10) {
           newgroup.push(_self.no_color);
         } else {
@@ -452,18 +452,18 @@ class ScatterPlot extends Component {
       const bbox = _self.bbox;
       const p_bbox = _self.prev_bbox;
 
-      for(var i=0;i<_self.plotDots._groups[0].length;i++) {
-        var d = d3.select(_self.plotDots._groups[0][i]);
+      for(let i=0;i<_self.plotDots._groups[0].length;i++) {
+        let d = d3.select(_self.plotDots._groups[0][i]);
 
         if(d.classed("area-" + (_self.draw_color + 1))) {
           if(!_self.state.e1lock) {
-            var cx_inner_dom = d3.scaleLinear().domain([p_bbox[0], p_bbox[2]]).range([bbox[0], bbox[2]]);
-            var new_cx = cx_inner_dom(_self.pxy_origins[i][0]);
+            let cx_inner_dom = d3.scaleLinear().domain([p_bbox[0], p_bbox[2]]).range([bbox[0], bbox[2]]);
+            let new_cx = cx_inner_dom(_self.pxy_origins[i][0]);
             d.attr("cx", new_cx);
           }
           if(!_self.state.e2lock) {
-            var cy_inner_dom = d3.scaleLinear().domain([p_bbox[1], p_bbox[3]]).range([bbox[1], bbox[3]]);
-            var new_cy = cy_inner_dom(_self.pxy_origins[i][1]);
+            let cy_inner_dom = d3.scaleLinear().domain([p_bbox[1], p_bbox[3]]).range([bbox[1], bbox[3]]);
+            let new_cy = cy_inner_dom(_self.pxy_origins[i][1]);
             d.attr("cy", new_cy);
           }
         }
@@ -474,24 +474,24 @@ class ScatterPlot extends Component {
     const setOriginPos = () => {
       _self.mxy_origin = d3.mouse(plotArea.node());
       _self.pxy_origins = [];
-      for(var i=0;i<_self.plotDots._groups[0].length;i++) {
-        var d = d3.select(_self.plotDots._groups[0][i]);
-        var cx = Number(d.attr("cx"));
-        var cy = Number(d.attr("cy"));
+      for(let i=0;i<_self.plotDots._groups[0].length;i++) {
+        let d = d3.select(_self.plotDots._groups[0][i]);
+        let cx = Number(d.attr("cx"));
+        let cy = Number(d.attr("cy"));
         _self.pxy_origins.push([cx, cy]);
       }
     }
 
     this.getCenter = () => {
-      var gcenter = [0, 0];
-      var cnt = 0;
-      for(var i=0;i<_self.plotDots._groups[0].length;i++) {
-        var d = d3.select(_self.plotDots._groups[0][i]);
+      let gcenter = [0, 0];
+      let cnt = 0;
+      for(let i=0;i<_self.plotDots._groups[0].length;i++) {
+        let d = d3.select(_self.plotDots._groups[0][i]);
 
         if(d.classed("area-" + (_self.draw_color + 1))) {
           cnt++;
-          var cx = Number(d.attr("cx"));
-          var cy = Number(d.attr("cy"));
+          let cx = Number(d.attr("cx"));
+          let cy = Number(d.attr("cy"));
           gcenter[0] += cx;
           gcenter[1] += cy;
         }
@@ -503,7 +503,7 @@ class ScatterPlot extends Component {
     }
 
     this.filterVisible = () => {
-      for(var i=0;i<_self._group.length;i++) {
+      for(let i=0;i<_self._group.length;i++) {
         if(_self._group[i] == _self.no_color) {
           _self._data[i] = [NaN, NaN];//[0,0];
         }
@@ -511,8 +511,8 @@ class ScatterPlot extends Component {
     }
 
     this.plotToData = () => {
-      for(var i=0;i<_self.plotDots._groups[0].length;i++) {
-        var d = d3.select(_self.plotDots._groups[0][i]);
+      for(let i=0;i<_self.plotDots._groups[0].length;i++) {
+        let d = d3.select(_self.plotDots._groups[0][i]);
 
         if(d.classed("area-" + (_self.draw_color + 1))) {
           _self._data[i] = [x.invert(Number(d.attr("cx"))), y.invert(Number(d.attr("cy")))];
@@ -521,10 +521,10 @@ class ScatterPlot extends Component {
     }
 
     const getSelectedDataStats = () => {
-      var targetPoint = [];
+      let targetPoint = [];
 
-      for(var i=0;i<_self.plotDots._groups[0].length;i++) {
-        var d = d3.select(_self.plotDots._groups[0][i]);
+      for(let i=0;i<_self.plotDots._groups[0].length;i++) {
+        let d = d3.select(_self.plotDots._groups[0][i]);
 
         if(d.classed("area-" + (_self.draw_color + 1))) {
           targetPoint.push([x.invert(Number(d.attr("cx"))), y.invert(Number(d.attr("cy")))]);
@@ -535,19 +535,19 @@ class ScatterPlot extends Component {
         return { avg: [NaN, NaN], var: [NaN, NaN] };
       }
 
-      var res = {
+      let res = {
         avg: [0,0],
         var: [0,0],
       };
 
-      for(var i=0;i<targetPoint.length;i++) {
+      for(let i=0;i<targetPoint.length;i++) {
         res.avg[0] += targetPoint[i][0];
         res.avg[1] += targetPoint[i][1];
       }
       res.avg[0] = res.avg[0] / targetPoint.length;
       res.avg[1] = res.avg[1] / targetPoint.length;
 
-      for(var i=0;i<targetPoint.length;i++) {
+      for(let i=0;i<targetPoint.length;i++) {
         res.var[0] += (targetPoint[i][0] - res.avg[0]) * (targetPoint[i][0] - res.avg[0]);
         res.var[1] += (targetPoint[i][1] - res.avg[1]) * (targetPoint[i][1] - res.avg[1]);
       }
@@ -561,11 +561,11 @@ class ScatterPlot extends Component {
       const stats = getSelectedDataStats();
       const scale = 2;
 
-      for(var i=0;i<_self.plotDots._groups[0].length;i++) {
-        var d = d3.select(_self.plotDots._groups[0][i]);
+      for(let i=0;i<_self.plotDots._groups[0].length;i++) {
+        let d = d3.select(_self.plotDots._groups[0][i]);
 
         if(d.classed("area-" + (_self.draw_color + 1))) {
-          var dis = [(Math.random() - 0.5) * scale, (Math.random() - 0.5) * scale];
+          let dis = [(Math.random() - 0.5) * scale, (Math.random() - 0.5) * scale];
           _self.pxy_origins[i][0] = _self.pxy_origins[i][0] + dis[0];
           _self.pxy_origins[i][1] = _self.pxy_origins[i][1] + dis[1];
           d.attr("cx", _self.pxy_origins[i][0]);
@@ -578,12 +578,12 @@ class ScatterPlot extends Component {
       const radian = angle / 360 * Math.PI * 2;
       const gcenter = _self.getCenter();
 
-      for(var i=0;i<_self.plotDots._groups[0].length;i++) {
-        var d = d3.select(_self.plotDots._groups[0][i]);
+      for(let i=0;i<_self.plotDots._groups[0].length;i++) {
+        let d = d3.select(_self.plotDots._groups[0][i]);
 
         if(d.classed("area-" + (_self.draw_color + 1))) {
-          var rx = _self.pxy_origins[i][0] - gcenter[0];
-          var ry = _self.pxy_origins[i][1] - gcenter[1];
+          let rx = _self.pxy_origins[i][0] - gcenter[0];
+          let ry = _self.pxy_origins[i][1] - gcenter[1];
           _self.pxy_origins[i][0] = rx * Math.cos(radian) - ry * Math.sin(radian) + gcenter[0];
           _self.pxy_origins[i][1] = rx * Math.sin(radian) + ry * Math.cos(radian) + gcenter[1];
           d.attr("cx", _self.pxy_origins[i][0]);
@@ -593,7 +593,7 @@ class ScatterPlot extends Component {
     }
 
     const moveInfoPanel = (point) => {
-      var stats = getSelectedDataStats();
+      let stats = getSelectedDataStats();
       const avg_text = "avg:(" + stats.avg[0].toFixed(1) + "," + stats.avg[1].toFixed(1) + ")";
       const var_text = "var:(" + stats.var[0].toFixed(1) + "," + stats.var[1].toFixed(1) + ")";
       infoTextAvg.text(avg_text);
@@ -604,8 +604,8 @@ class ScatterPlot extends Component {
 
     this.getSelIdxNumber = () => {
       const getDist = (p1, p2) => {
-        var tmp1 = p1[0] - p2[0];
-        var tmp2 = p1[1] - p2[1];
+        let tmp1 = p1[0] - p2[0];
+        let tmp2 = p1[1] - p2[1];
 
         return Math.sqrt(tmp1 * tmp1 + tmp2 * tmp2);
       }
@@ -620,7 +620,7 @@ class ScatterPlot extends Component {
       let center = _self.getCenter();
       center = [x.invert(center[0]), y.invert(center[1])];
 
-      for(var i=0;i<_self._group.length;i++) {
+      for(let i=0;i<_self._group.length;i++) {
         if(_self._group[i] == _self.draw_color) {
           sel_count++;
           dist_ary.push(getDist(center, _self._data[i]));
@@ -632,11 +632,11 @@ class ScatterPlot extends Component {
 
       let counter = 0;
       const dom = d3.max(dist_ary);
-      for(var i=0;i<sel_count;i++) {
-        var norm = getNorm(dom);
-        var min_idx = -1;
-        var min_dist = dom * 10000000;
-        for(var t=0;t<dist_ary.length;t++) {
+      for(let i=0;i<sel_count;i++) {
+        let norm = getNorm(dom);
+        let min_idx = -1;
+        let min_dist = dom * 10000000;
+        for(let t=0;t<dist_ary.length;t++) {
           if(dist_ary[t] != - 1 && Math.abs(norm - dist_ary[t]) < min_dist) {
             min_idx = t;
             min_dist = Math.abs(norm - dist_ary[t]);
@@ -653,11 +653,11 @@ class ScatterPlot extends Component {
       pd_ratio = pd_ratio/100;
 
       const erase_eph_plots = () => {
-        var newdata = [];
-        var newgroup = [];
+        let newdata = [];
+        let newgroup = [];
 
-        for(var i=0;i<_self.plotDots._groups[0].length;i++) {
-          var d = d3.select(_self.plotDots._groups[0][i]);
+        for(let i=0;i<_self.plotDots._groups[0].length;i++) {
+          let d = d3.select(_self.plotDots._groups[0][i]);
           if(!d.classed("area-" + (_self.eph_color + 1))) {
             newdata.push(_self._data[i]);
             newgroup.push(_self._group[i])
@@ -669,9 +669,9 @@ class ScatterPlot extends Component {
       }
 
       const reset_no_color = () => {
-        var newgroup = [];
+        let newgroup = [];
 
-        for(var i=0;i<_self._group.length;i++) {
+        for(let i=0;i<_self._group.length;i++) {
           if(_self._group[i] == _self.no_color) {
             newgroup.push(_self.draw_color);
           } else {
@@ -689,8 +689,8 @@ class ScatterPlot extends Component {
       dum[0] = (dum[0][1] - dum[0][0]) * (bbox[2] - bbox[0]) * 0.2;
       dum[1] = (dum[1][1] - dum[1][0]) * (bbox[3] - bbox[1]) * 0.2;
 
-      var cnt = 0;
-      for(var i=0;i<_self._group.length;i++) {
+      let cnt = 0;
+      for(let i=0;i<_self._group.length;i++) {
         if(_self._group[i] == _self.draw_color || _self._group[i] == _self.no_color) {
           cnt++;
         }
@@ -699,15 +699,15 @@ class ScatterPlot extends Component {
       erase_eph_plots();
       reset_no_color();
       if(pd_ratio > 1) {
-        for(var i=0;i<pd_ratio * cnt;i++) {
+        for(let i=0;i<pd_ratio * cnt;i++) {
           _self._data.push(getNormDist2(mu, dum));
           _self._group.push(_self.eph_color);
         }
       } else {
         const idxlist = _self.getSelIdxNumber();
         const upper = (1 - pd_ratio) * cnt - 1;
-        for(var i=0;i<upper;i++) {
-          for(var t=0;t<idxlist.length;t++) {
+        for(let i=0;i<upper;i++) {
+          for(let t=0;t<idxlist.length;t++) {
             if(idxlist[t] == i) {
               _self._group[t] = _self.no_color;
             }
@@ -718,9 +718,9 @@ class ScatterPlot extends Component {
     }
 
     const reset_color = () => {
-      var newgroup = [];
+      let newgroup = [];
 
-      for(var i=0;i<_self._group.length;i++) {
+      for(let i=0;i<_self._group.length;i++) {
         newgroup.push(_self.def_color);
       }
 
@@ -758,7 +758,7 @@ class ScatterPlot extends Component {
         infoPanel.attr("transform", "translate(-1000, 0)")
       })
       .on("mousemove", () => {
-        var pointer = d3.mouse(plotArea.node());
+        let pointer = d3.mouse(plotArea.node());
         _self.plotCircle
           .attr("cx", pointer[0])
           .attr("cy", pointer[1]);
@@ -791,10 +791,10 @@ class ScatterPlot extends Component {
         } else if(_self.state.cursorType == "search") {
           moveInfoPanel(pointer);
         } else if(_self.props.is_manipulating && _self.state.cursorType == "rotate") {
-          var pointer = d3.mouse(plotArea.node());
-          var dy = _self.mxy_origin[1] - pointer[1];
-          var rot = 0;
-          var center = [(_self.bbox[0] + _self.bbox[2])/2, (_self.bbox[1] + _self.bbox[3])/2]
+          let pointer = d3.mouse(plotArea.node());
+          let dy = _self.mxy_origin[1] - pointer[1];
+          let rot = 0;
+          let center = [(_self.bbox[0] + _self.bbox[2])/2, (_self.bbox[1] + _self.bbox[3])/2]
           if(pointer[0] < center[0]) {
             if(dy > 0) rot = 2 * dy;
             if(dy <= 0) rot = 2 * dy;
@@ -842,12 +842,12 @@ class ScatterPlot extends Component {
         } else if(_self.state.cursorType == 'bucket') {
 
           reset_color();
-          var pointer = d3.mouse(plotArea.node());
+          let pointer = d3.mouse(plotArea.node());
 
           const drawWithClusters = (res) => {
             const sel_idx = nearestPlotIdx(pointer);
             const sel_group = res.labels[sel_idx];
-            for(var i=0;i<_self._group.length;i++) {
+            for(let i=0;i<_self._group.length;i++) {
               if(res.labels[i] == sel_group) {
                 _self._group[i] = _self.draw_color;
               }
@@ -859,11 +859,11 @@ class ScatterPlot extends Component {
 
           switch($(_self.clustering_method_sel).val()) {
             case "kmeans":
-              var clu_num = Number($(_self.kmeans_clu_num).val());
+              let clu_num = Number($(_self.kmeans_clu_num).val());
               ana_api.cluster_kmeans(_self._data, clu_num, drawWithClusters);
               break;
             case "dbscan":
-              var eps = Number($(_self.dbscan_eps).val());
+              let eps = Number($(_self.dbscan_eps).val());
               ana_api.cluster_dbscan(_self._data, eps, drawWithClusters);
               break;
           }
@@ -886,7 +886,7 @@ class ScatterPlot extends Component {
         });
       })
       .on("mousemove", () => {
-        var pointer = d3.mouse(plotArea.node());
+        let pointer = d3.mouse(plotArea.node());
         if(_self.state.bboxclicking) {
           _self.bbox[0] = pointer[0];
           movePlotBBox();
@@ -912,7 +912,7 @@ class ScatterPlot extends Component {
         });
       })
       .on("mousemove", () => {
-        var pointer = d3.mouse(plotArea.node());
+        let pointer = d3.mouse(plotArea.node());
         if(_self.state.bboxclicking) {
           _self.bbox[2] = pointer[0];
           movePlotBBox();
@@ -939,7 +939,7 @@ class ScatterPlot extends Component {
         });
       })
       .on("mousemove", () => {
-        var pointer = d3.mouse(plotArea.node());
+        let pointer = d3.mouse(plotArea.node());
         if(_self.state.bboxclicking) {
           _self.bbox[1] = pointer[1];
           movePlotBBox();
@@ -965,7 +965,7 @@ class ScatterPlot extends Component {
         });
       })
       .on("mousemove", () => {
-        var pointer = d3.mouse(plotArea.node());
+        let pointer = d3.mouse(plotArea.node());
         if(_self.state.bboxclicking) {
           _self.bbox[3] = pointer[1];
           movePlotBBox();
@@ -991,7 +991,7 @@ class ScatterPlot extends Component {
         });
       })
       .on("mousemove", () => {
-        var pointer = d3.mouse(plotArea.node());
+        let pointer = d3.mouse(plotArea.node());
 
         if(_self.state.bboxclicking) {
           const width = _self.prev_bbox[2] - _self.prev_bbox[0];
@@ -1043,7 +1043,7 @@ class ScatterPlot extends Component {
       return;
     }
 
-    var _self = this;
+    let _self = this;
     const execLoop = (exec_loop = this.props.getExecLoopFlg()) => {
       if(!exec_loop) {
         return;

@@ -1,7 +1,7 @@
 import config from "../config";
 const $ = require('jquery');
 
-var Test = {
+const Test = {
   exec_local: (codes, filename, cb) => {
     const URL = "/api/exec/";
     const data = {

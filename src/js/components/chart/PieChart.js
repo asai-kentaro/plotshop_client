@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-var d3 = require('d3');
+const d3 = require('d3');
 
 /*
 =format=
@@ -31,14 +31,14 @@ class PieChart extends Component {
       d3.select(node).select("svg").remove();
     }
 
-    var height = 250,
+    let height = 250,
       width = 250,
       outerRadius = 100,
       innerRadius = 30;
 
-    var data = this.props.data.data;
+    let data = this.props.data.data;
     if(!data[0].value) {
-      for(var i=0;i<data.length;i++) {
+      for(let i=0;i<data.length;i++) {
         data[i] = {
           label: i,
           value: data[i],
@@ -46,30 +46,30 @@ class PieChart extends Component {
       }
     }
 
-    var valueVarIdx = _.findIndex(this.props.data.head, (o) => {return o == this.props.mark.valueVar});
+    let valueVarIdx = _.findIndex(this.props.data.head, (o) => {return o == this.props.mark.valueVar});
     valueVarIdx = valueVarIdx == -1 ? 0 : valueVarIdx;
-    var labelVarIdx = _.findIndex(this.props.data.head, (o) => {return o == this.props.mark.labelVar});
+    let labelVarIdx = _.findIndex(this.props.data.head, (o) => {return o == this.props.mark.labelVar});
     labelVarIdx = labelVarIdx == -1 ? 1 : labelVarIdx;
 
-    var arc = d3.arc()
+    let arc = d3.arc()
       .outerRadius(outerRadius)
       .innerRadius(innerRadius);
 
-    var pie = d3.pie()
+    let pie = d3.pie()
       .value((d) => { return d.value[valueVarIdx]; });
 
-    var svg = d3.select(node)
+    let svg = d3.select(node)
       .classed("svg-container", true)
       .append("svg")
       .attr("preserveAspectRation", "xMinYMin meet")
       .attr("viewBox", "0 0 " + width + " " + height)
       .classed("svg-content-responsive", true);
 
-    var sections = svg.selectAll("g")
+    let sections = svg.selectAll("g")
       .data(pie(data))
       .enter()
       .append("g");
-    var secDOM = sections.append("path")
+    let secDOM = sections.append("path")
       .attr("d", arc)
       .attr("class", (d,i) => {
         if(this.state.selected == -1) {
@@ -86,9 +86,9 @@ class PieChart extends Component {
 
     secDOM.on("click", (d, i) => {
       console.log("=[click] pie=");
-      var code = this.props.mark.eventTemplateClick;
+      let code = this.props.mark.eventTemplateClick;
       code = code.replace(/\^(.+)\^/, d.data.value[labelVarIdx]);
-      var manipulation = {
+      let manipulation = {
         chartVar: this.props.mark.val,
         code: code,
         type: "execute",
@@ -103,9 +103,9 @@ class PieChart extends Component {
     this._labels = sections
       .append("g")
       .attr("transform", function(d, i){
-        var angle = (d.startAngle + d.endAngle)/2;
-        var posX = width/2 + (outerRadius - 30) * Math.sin(angle);
-        var posY = height/2 + (outerRadius - 30) * (-Math.cos(angle));
+        let angle = (d.startAngle + d.endAngle)/2;
+        let posX = width/2 + (outerRadius - 30) * Math.sin(angle);
+        let posY = height/2 + (outerRadius - 30) * (-Math.cos(angle));
         return "translate(" + posX + "," + posY + ")";
       })
       .append("text")

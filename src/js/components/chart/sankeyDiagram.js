@@ -8,7 +8,7 @@ class SankeyDiagram extends Component {
   }
 
   componentDidMount() {
-    var _data = {
+    let _data = {
       nodes: [
         {id: 0, title: "morning"},
         {id: 1, title: "noon"},
@@ -28,7 +28,7 @@ class SankeyDiagram extends Component {
     const fader = (color) => { return d3.interpolateRgb(color, "#fff")(0.2); };
     const color = d3.scaleOrdinal(d3.schemeCategory20);
 
-    var graph = sankey()
+    let graph = sankey()
       .nodeWidth(15)
       .nodePadding(10)
       .nodeAlign(sankeyLeft)
@@ -60,7 +60,7 @@ class SankeyDiagram extends Component {
       .attr("d", sankeyLinkHorizontal())
       .attr("stroke-width", (d) => { return d.width; });
 
-    var node = this._field.append('g')
+    let node = this._field.append('g')
       .attr('class', 'nodes')
       .attr("font-family", "sans-serif")
       .attr("font-size", 10)

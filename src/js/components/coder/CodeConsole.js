@@ -29,7 +29,7 @@ class CodeConsole extends React.Component {
   }
 
   handleCodeInputChange(e) {
-    var str = e.target.value;
+    let str = e.target.value;
     if(str.length < 1) {
       str = ">";
     }

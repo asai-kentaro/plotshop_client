@@ -3,8 +3,11 @@ import { Row, Col, Button, FormControl, FormGroup, Glyphicon, ControlLabel } fro
 
 import api_exec from "../../api/code";
 
-var $ = require('jquery');
+const $ = require('jquery');
 
+/*
+ * Coding panel (Left side in main area)
+ */
 class CodeEditor extends React.Component {
   constructor(props) {
     super(props);
@@ -117,11 +120,11 @@ class CodeEditor extends React.Component {
       this.marks.push(mark);
     }
 
-    var codeparts = [""];
-    var keyChain = {};
-    var line = "";
+    let codeparts = [""];
+    let keyChain = {};
+    let line = "";
     let command = null;
-    for(var i=0;i<this.pyEditor.lineCount();i++) {
+    for(let i=0;i<this.pyEditor.lineCount();i++) {
       line = this.pyEditor.getLine(i);
       codeparts[codeparts.length-1] += line + '\n';
 
@@ -182,11 +185,11 @@ class CodeEditor extends React.Component {
       this.marks.push(mark);
     }
 
-    var codeparts = [""];
-    var keyChain = {};
-    var line = "";
+    let codeparts = [""];
+    let keyChain = {};
+    let line = "";
     let command = null;
-    for(var i=0;i<this.pyEditor.lineCount();i++) {
+    for(let i=0;i<this.pyEditor.lineCount();i++) {
       line = this.pyEditor.getLine(i);
       codeparts[codeparts.length-1] += line + '\n';
 
@@ -226,7 +229,7 @@ class CodeEditor extends React.Component {
 
         this.props.setChartEmpty();
         let marks = this.marks;
-        for(var i=0;i<marks.length;i++) {
+        for(let i=0;i<marks.length;i++) {
           if(res.res.out_vars[marks[i].val]) {
             if(res.res.breakout) {
               if(i == res.res.breakout.index - 1) {

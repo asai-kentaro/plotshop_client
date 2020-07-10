@@ -9,7 +9,14 @@ const $ = require('jquery');
 
 import api_data from "../../api/data";
 
-
+/*
+ * (Structure)
+ * CoderStudio
+ * + CodeEditor
+ * + ChartDashboard
+ * + CodeConsole
+ *
+ */
 class CoderStudio extends React.Component {
   constructor(props) {
     super(props);
@@ -27,8 +34,8 @@ class CoderStudio extends React.Component {
   }
 
   handleDataUpload() {
-    var form = $("#upload-form")[0];
-    var formData = new FormData(form);
+    let form = $("#upload-form")[0];
+    let formData = new FormData(form);
 
     api_data.upload(formData);
   }

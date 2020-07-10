@@ -11,9 +11,9 @@ const initialState = {
 }
 
 const varTypeSelect = (data) => {
-  var res = [];
+  let res = [];
 
-  for(var i=0;i<data.length;i++) {
+  for(let i=0;i<data.length;i++) {
     if(!isNaN(Number(data[i]))) {
       res.push("num");
     } else {
@@ -29,13 +29,13 @@ const dataset = (state = initialState, action) => {
 
   switch(action.type) {
     case "DATASET_LOAD":
-      var vars = action.data[0];
-      var data = action.data.slice(1, datamax);
-      var varts = varTypeSelect(data[0]);
+      let vars = action.data[0];
+      let data = action.data.slice(1, datamax);
+      let varts = varTypeSelect(data[0]);
 
       state.scatterplot.e1 = -1;
       state.scatterplot.e2 = -1;
-      for(var i=0;i<varts.length;i++) {
+      for(let i=0;i<varts.length;i++) {
         if(varts[i] == "num") {
           if(state.scatterplot.e1 == -1) {
             state.scatterplot.e1 = i;
@@ -45,8 +45,8 @@ const dataset = (state = initialState, action) => {
           }
         }
       }
-      var group = [];
-      for(var i=0;i<data.length;i++) {
+      let group = [];
+      for(let i=0;i<data.length;i++) {
         group.push(0);
       }
       return {
@@ -59,7 +59,7 @@ const dataset = (state = initialState, action) => {
       }
       break;
     case "DATASET_ELM_SEL":
-      var newstate = {
+      let newstate = {
         filename: state.filename,
         variables: state.variables,
         vartypes: state.vartypes,
@@ -77,7 +77,7 @@ const dataset = (state = initialState, action) => {
       break;
     case "ADD_COL_DATA":
       state = Object.assign({}, state);
-      for(var i=0;i<action.data.length;i++) {
+      for(let i=0;i<action.data.length;i++) {
         state.data[i][state.variables.length] = action.data[i];
       }
       state.variables.push(action.name);
